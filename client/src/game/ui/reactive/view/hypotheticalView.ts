@@ -49,8 +49,16 @@ export function onActiveOrAmLeaderChanged(data: {
   sharedReplay: boolean;
 }): void {
   const visibleForLeaderInHypo = data.active && data.amLeader;
-  globals.elements.endHypotheticalButton?.visible(visibleForLeaderInHypo);
+  globals.elements.hypoButtonsArea?.visible(visibleForLeaderInHypo);
   globals.elements.clueArea?.visible(visibleForLeaderInHypo);
+
+  if (visibleForLeaderInHypo) {
+    globals.elements.lowerClueArea?.setLeft();
+    globals.elements.clueAreaDisabled?.setLeft();
+  } else {
+    globals.elements.lowerClueArea?.setCenter();
+    globals.elements.clueAreaDisabled?.setCenter();
+  }
 
   const visibleForLeaderInSharedHypo =
     visibleForLeaderInHypo && data.sharedReplay;
@@ -112,9 +120,9 @@ export function shouldShowHypoBackButtonChanged(enabled: boolean): void {
 export function onDrawnCardsInHypotheticalChanged(
   drawnCardsInHypothetical: boolean,
 ): void {
-  globals.elements.toggleDrawnCardsButton?.setText({
-    line1: drawnCardsInHypothetical ? "Hide" : "Show",
-  });
+  globals.elements.toggleDrawnCardsButton?.text(
+    drawnCardsInHypothetical ? "Hide Drawn" : "Show Drawn",
+  );
 
   // Check if the ability to give a clue changed
   clues.checkLegal();
