@@ -2130,6 +2130,11 @@ function drawHypotheticalArea() {
     text: "Edit Cards",
     fontSize: 0.019 * winH,
   });
+  globals.elements.editCardsButton.on("click tap", () => {
+    globals.elements.editCardsButton?.setPressed(
+      !globals.elements.editCardsButton?.pressed,
+    );
+  });
   globals.elements.hypoButtonsArea.add(
     (globals.elements.editCardsButton as unknown) as Konva.Group,
   );
@@ -2145,7 +2150,7 @@ function drawHypotheticalArea() {
     width: hypoButtonWidth * winW,
     height: hypoButtonHeight * winH,
     text: "Show Drawn",
-    fontSize: 0.017 * winH,
+    fontSize: 0.016 * winH,
     visible: false,
   });
   globals.elements.toggleDrawnCardsButton.on(
